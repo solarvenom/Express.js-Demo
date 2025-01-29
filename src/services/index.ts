@@ -2,12 +2,15 @@ import guestsRouter from "./guests/guests.router";
 import propertiesRouter from "./properties/properties.router";
 import reservationsRouter from "./reservations/reservations.router";
 
-import { Guests } from "./guests/entities/guests.entity";
-import { Properties } from "./properties/entities/properties.entity";
-import { Reservations } from "./reservations/entities/reservations.entity";
+// import { GuestEntity } from "./guests/entities/guest.entity";
+import { GuestEntity } from "./guests/entities/guest.entity";
+// import { PropertyEntity } from "./properties/entities/property.entity";
+import { PropertyEntity } from "./properties/entities/property.entity";
+// import { ReservationEntity } from "./reservations/entities/reservation.entity";
+import { ReservationEntity } from "./reservations/entities/reservation.entity";
 
 // Routers
 export { guestsRouter, propertiesRouter, reservationsRouter };
 
 // Entities
-export { Guests, Properties, Reservations };
+export { GuestEntity, PropertyEntity, ReservationEntity };

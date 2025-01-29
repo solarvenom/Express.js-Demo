@@ -1,4 +1,6 @@
+import "reflect-metadata";
 import express, { Application } from 'express';
+import bookingDataSource from './dataSource'
 import { guestsRouter, propertiesRouter, reservationsRouter } from './services'
 
 const app: Application = express();
@@ -11,3 +13,5 @@ app.use('/reservations', reservationsRouter);
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+bookingDataSource.initialize();
