@@ -1,6 +1,13 @@
-import guestRouter from "./guests/guest.router";
-import propertyRouter from "./properties/property.router";
-import reservationRouter from "./reservations/reservation.router";
+import guestsRouter from "./guests/guests.router";
+import propertiesRouter from "./properties/properties.router";
+import reservationsRouter from "./reservations/reservations.router";
+
+import { Guests } from "./guests/entities/guests.entity";
+import { Properties } from "./properties/entities/properties.entity";
+import { Reservations } from "./reservations/entities/reservations.entity";
 
 // Routers
-export { guestRouter, propertyRouter, reservationRouter };
+export { guestsRouter, propertiesRouter, reservationsRouter };
+
+// Entities
+export { Guests, Properties, Reservations };
