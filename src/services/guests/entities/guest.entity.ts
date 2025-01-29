@@ -7,6 +7,7 @@ export class GuestEntity {
     @PrimaryGeneratedColumn()
     id!: number
 
+    @Column()
     @Generated("uuid")
     uuid!: UUID
 
@@ -16,6 +17,9 @@ export class GuestEntity {
     @Column()
     phone!: string
 
-    @OneToMany(() => ReservationEntity, (reservation) => reservation.guest)
+    @Column({nullable: true})
+    deleted_at!: Date
+
+    @OneToMany(() => ReservationEntity, (reservation) => reservation.guest, { onDelete: 'CASCADE'})
     reservations!: ReservationEntity[]
 }

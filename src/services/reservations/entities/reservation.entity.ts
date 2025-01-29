@@ -7,15 +7,22 @@ export class ReservationEntity {
     @PrimaryGeneratedColumn()
     id!: number
 
+    @Column()
     @Generated("uuid")
     uuid!: UUID
 
     @Column()
-    name!: string
+    startDate!: Date
 
-    @ManyToOne(() => GuestEntity, (guest) => guest.reservations)
+    @Column()
+    endDate!: Date
+
+    @Column({nullable: true})
+    deleted_at!: Date
+
+    @ManyToOne(() => GuestEntity, (guest) => guest.reservations, { onDelete: 'CASCADE'})
     guest!: GuestEntity
 
-    @ManyToOne(() => PropertyEntity, (property) => property.reservations)
+    @ManyToOne(() => PropertyEntity, (property) => property.reservations, { onDelete: 'CASCADE'})
     property!: PropertyEntity
 }

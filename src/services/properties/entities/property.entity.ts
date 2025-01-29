@@ -7,15 +7,16 @@ export class PropertyEntity {
     @PrimaryGeneratedColumn()
     id!: number
 
+    @Column()
     @Generated("uuid")
     uuid!: UUID
 
     @Column()
-    startDate!: Date
+    name!: string
 
-    @Column()
-    endDate!: Date
-
-    @OneToMany(() => ReservationEntity, (reservation) => reservation.property)
+    @Column({nullable: true})
+    deleted_at!: Date
+    
+    @OneToMany(() => ReservationEntity, (reservation) => reservation.property, { onDelete: 'CASCADE'})
     reservations!: ReservationEntity[]
 }
