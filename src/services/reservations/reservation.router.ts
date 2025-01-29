@@ -2,23 +2,23 @@ import { Router, Request, Response } from 'express';
 
 const reservationRouter: Router = Router();
 
-reservationRouter.get('/reservations', (req: Request, res: Response) => {
+reservationRouter.get('/', (req: Request, res: Response) => {
   res.send('Get all reservations');
 });
 
-reservationRouter.post('/reservations', (req: Request, res: Response) => {
+reservationRouter.post('/', (req: Request, res: Response) => {
     res.send('Create a new reservations');
 });
 
-reservationRouter.get('/reservations/:propertyUUID', (req: Request, res: Response) => {
+reservationRouter.get('/:propertyUUID', (req: Request, res: Response) => {
     res.send('Get all reservations with a specified property');
 });
 
-reservationRouter.put('/reservations/:propertyUUID', (req: Request, res: Response) => {
+reservationRouter.put('/:propertyUUID', (req: Request, res: Response) => {
     res.send('Get all reservations with a specified property');
 });
 
-reservationRouter.delete('/reservations/:propertyUUID', (req: Request, res: Response) => {
+reservationRouter.delete('/:propertyUUID', (req: Request, res: Response) => {
     res.send('Get all reservations with a specified property');
 });
 
