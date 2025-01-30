@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { seedDatabase } from './core.service';
 
-const coreRouter: Router = Router();
+const coreController: Router = Router();
 
-coreRouter.get('/seed', async (req: Request, res: Response) => {
+coreController.get('/seed', async (req: Request, res: Response) => {
     try {
         await seedDatabase()
         res.send('Seed DB with mock data');
@@ -12,5 +12,5 @@ coreRouter.get('/seed', async (req: Request, res: Response) => {
     }
 });
 
-export default coreRouter;
+export default coreController;
 

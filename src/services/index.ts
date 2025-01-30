@@ -1,14 +1,14 @@
-import guestsRouter from "./guests/guests.router";
-import propertiesRouter from "./properties/properties.router";
-import reservationsRouter from "./reservations/reservations.router";
-import coreRouter from "./core/core.router";
+import guestsController from "./guests/guests.controller";
+import propertiesController from "./properties/properties.controller";
+import reservationsController from "./reservations/reservations.controller";
+import coreController from "./core/core.controller";
 
 import { GuestEntity } from "./guests/entities/guest.entity";
 import { PropertyEntity } from "./properties/entities/property.entity";
 import { ReservationEntity } from "./reservations/entities/reservation.entity";
 
 // Routers
-export { guestsRouter, propertiesRouter, reservationsRouter, coreRouter };
+export { guestsController, propertiesController, reservationsController, coreController };
 
 // Entities
 export { GuestEntity, PropertyEntity, ReservationEntity };
