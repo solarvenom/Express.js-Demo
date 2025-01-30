@@ -25,6 +25,7 @@ const swaggerOptions = {
 }
 const swaggerDocs = swaggerjsdoc(swaggerOptions)
 
+app.use(express.json())
 app.use("/guests", guestsController)
 app.use("/properties", propertiesController)
 app.use("/reservations", reservationsController)

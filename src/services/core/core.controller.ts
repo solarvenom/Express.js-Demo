@@ -7,6 +7,8 @@ const coreController: Router = Router();
  * @swagger
  * /seed:
  *   get:
+ *     tags:
+ *       - DATA SEEDING
  *     summary: Seed the database with mock data.
  *     description: Seed the database with mock data.
  *     responses:
