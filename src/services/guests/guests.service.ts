@@ -1,20 +1,19 @@
 import { GuestsRepository, GuestInterface } from "../"
 
-export class GuestsService {
-    repository: GuestsRepository
+const repository = GuestsRepository
 
-    constructor(){
-        this.repository = new GuestsRepository()
-    }
+const getAllGuests = async () => {
+    return repository.getAllGuests()
+}
 
-    getAllGuests = async () => {
-        return this.repository.getAllGuests()
-    }
+const createGuest = async (newGuest: GuestInterface) => {
+    if(!newGuest.name || newGuest.name == "") throw new Error("Guest name missing")
+    if(!newGuest.phone || newGuest.phone == "") throw new Error("Guest phone missing")
+    
+    return repository.createGuest(newGuest);
+}
 
-    createGuest = async (newGuest: GuestInterface) => {
-        if(!newGuest.name || newGuest.name == "") throw new Error("Guest name missing")
-        if(!newGuest.phone || newGuest.phone == "") throw new Error("Guest phone missing")
-        
-        return this.repository.createGuest(newGuest);
-    }
+export {
+    getAllGuests,
+    createGuest
 }
