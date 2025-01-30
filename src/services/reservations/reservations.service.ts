@@ -5,7 +5,7 @@ const guestRepository = GuestsRepository
 const propertyRepository = PropertiesRepository
 
 const getAllReservations = async () => {
-    return reservationRepository.getAllReservations()
+    return reservationRepository.getAll()
 }
 
 const createReservation = async (newReservation: CreateReservationDto) => {
@@ -19,10 +19,10 @@ const createReservation = async (newReservation: CreateReservationDto) => {
     const endDate = new Date(newReservation.endDate)
     if(!newReservation.endDate || endDate.getTime() < now) throw new Error("End date either missing or in the past")
 
-    const activeBookingsByGuest = await reservationRepository.countReservationsByGuestUuid(newReservation.guestUuid)
+    const activeBookingsByGuest = await reservationRepository.countByGuestUuid(newReservation.guestUuid)
     if(activeBookingsByGuest >= 5) throw new Error("Guest already has 5 active bookings")
 
-    const timeframePropertyBookings = await reservationRepository.getReservationsInTimeframeByPropertyUuid(
+    const timeframePropertyBookings = await reservationRepository.getInTimeframeByPropertyUuid(
         newReservation.propertyUuid, 
         startDate,
         endDate

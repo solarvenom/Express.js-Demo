@@ -4,7 +4,7 @@ import { PropertyEntity } from "../"
 import { PropertyInterface } from "./interfaces/property.interface";
 import { UUID } from "crypto";
 
-const getAllProperties = async () => {
+const getAll = async () => {
     return dataSource.getRepository(PropertyEntity).find({ 
         where: {
             deleted_at: IsNull()
@@ -16,12 +16,12 @@ const getAllProperties = async () => {
     })
 }
 
-const createProperty = async(newProperty: PropertyInterface) => {
+const create = async(newProperty: PropertyInterface) => {
     const createdProperty = dataSource.getRepository(PropertyEntity).create(newProperty)
     return dataSource.getRepository(PropertyEntity).save(createdProperty)
 }
 
-const getPropertyByName = async (name: string) => {
+const getByName = async (name: string) => {
     return dataSource.getRepository(PropertyEntity).find({
         where: {
             name: name
@@ -66,9 +66,9 @@ const getByUuid = async (uuid: UUID) => {
 
 
 export {
-    getAllProperties,
-    createProperty,
-    getPropertyByName,
+    getAll,
+    create,
+    getByName,
     getReservationsByPropertyUuid,
     getByUuid
 }

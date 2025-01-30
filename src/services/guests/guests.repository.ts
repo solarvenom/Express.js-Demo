@@ -4,7 +4,7 @@ import { GuestEntity } from "../"
 import { GuestInterface } from "./interfaces/guest.interface";
 import { UUID } from "crypto";
 
-const getAllGuests = async () => {
+const getAll = async () => {
     return dataSource.getRepository(GuestEntity).find({ 
         where: {
             deleted_at: IsNull()
@@ -17,12 +17,12 @@ const getAllGuests = async () => {
     })
 }
 
-const createGuest = async(newGuest: GuestInterface) => {
+const create = async(newGuest: GuestInterface) => {
     const createdGuest = dataSource.getRepository(GuestEntity).create(newGuest)
     return dataSource.getRepository(GuestEntity).save(createdGuest)
 }
 
-const getGuestByName = async (name: string) => {
+const getByName = async (name: string) => {
     return dataSource.getRepository(GuestEntity).find({
         where: {
             name: name
@@ -67,9 +67,9 @@ const getByUuid = async (uuid: UUID) => {
 }
 
 export {
-    getAllGuests,
-    createGuest,
-    getGuestByName,
+    getAll,
+    create,
+    getByName,
     getReservationsByGuestUuid,
     getByUuid
 }

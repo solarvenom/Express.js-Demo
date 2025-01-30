@@ -1,9 +1,9 @@
-import { IsNull, LessThan, MoreThan, Between } from "typeorm"
+import { IsNull, Between } from "typeorm"
 import { UUID } from "crypto";
 import dataSource from "../../dataSource"
-import { ReservationEntity, ReservationInterface, SaveReservationDto } from ".."
+import { ReservationEntity, SaveReservationDto } from ".."
 
-const getAllReservations = async () => {
+const getAll = async () => {
     return dataSource.getRepository(ReservationEntity).find({ 
         where: {
             deleted_at: IsNull()
@@ -26,7 +26,7 @@ const getAllReservations = async () => {
     })
 }
 
-const getReservationsByGuestUuid = async (guestUuid: UUID) => {
+const getByGuestUuid = async (guestUuid: UUID) => {
     return dataSource.getRepository(ReservationEntity).find({
         where: {
             guest: {
@@ -37,7 +37,7 @@ const getReservationsByGuestUuid = async (guestUuid: UUID) => {
     })
 }
 
-const countReservationsByGuestUuid = async (guestUuid: UUID) => {
+const countByGuestUuid = async (guestUuid: UUID) => {
     return dataSource.getRepository(ReservationEntity).count({
         where: {
             guest: {
@@ -48,7 +48,7 @@ const countReservationsByGuestUuid = async (guestUuid: UUID) => {
     })
 }
 
-const getReservationsInTimeframeByPropertyUuid = async (propertyUuid: UUID, starDate: Date, endDate: Date) => {
+const getInTimeframeByPropertyUuid = async (propertyUuid: UUID, starDate: Date, endDate: Date) => {
     return dataSource.getRepository(ReservationEntity).find({
         where: [
             {
@@ -75,7 +75,7 @@ const getReservationsInTimeframeByPropertyUuid = async (propertyUuid: UUID, star
     })
 }
 
-const getReservationByUuid = async (reservationUuid: UUID) => {
+const getByUuid = async (reservationUuid: UUID) => {
     return dataSource.getRepository(ReservationEntity).find({
         where: {
             uuid: reservationUuid
@@ -83,7 +83,7 @@ const getReservationByUuid = async (reservationUuid: UUID) => {
     })
 }
 
-const softDeleteReservationByUuid = async (reservationUuid: UUID) => {
+const softDeleteByUuid = async (reservationUuid: UUID) => {
     return dataSource.getRepository(ReservationEntity).delete({
         uuid: reservationUuid
     })
@@ -96,11 +96,11 @@ const create = async(reservation: SaveReservationDto) => {
 }
 
 export {
-    getAllReservations,
-    getReservationsByGuestUuid,
-    getReservationsInTimeframeByPropertyUuid,
-    getReservationByUuid,
-    softDeleteReservationByUuid,
-    countReservationsByGuestUuid,
+    getAll,
+    getByGuestUuid,
+    getInTimeframeByPropertyUuid,
+    getByUuid,
+    softDeleteByUuid,
+    countByGuestUuid,
     create
 }
