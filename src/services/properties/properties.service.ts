@@ -9,7 +9,7 @@ const getAllProperties = async () => {
 }
 
 const getPropertyReservationsByUuid = async (propertyUuid: UUID) => {
-    return reservationRepository.getReservationsByPropertyUuid(propertyUuid)
+    return propertyRepository.getReservationsByPropertyUuid(propertyUuid)
 }
 
 const createProperty = async (newProperty: PropertyInterface) => {

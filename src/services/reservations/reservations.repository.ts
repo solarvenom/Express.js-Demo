@@ -7,7 +7,22 @@ const getAllReservations = async () => {
     return dataSource.getRepository(ReservationEntity).find({ 
         where: {
             deleted_at: IsNull()
-        } 
+        },
+        select: {
+            uuid: true,
+            startDate: true,
+            endDate: true,
+            guest: {
+                uuid: true,
+                name: true,
+                phone: true
+            },
+            property: {
+                uuid: true,
+                name: true
+            }
+        },
+        relations: ['guest', 'property']
     })
 }
 
@@ -38,19 +53,6 @@ const countReservationsByGuestUuid = async (guestUuid: UUID) => {
         }
     })
 }
-
-const getReservationsByPropertyUuid = async (propertyUuid: UUID) => {
-    return dataSource.getRepository(ReservationEntity).find({
-        where: {
-            property: {
-                uuid: propertyUuid
-            },
-            deleted_at: IsNull()
-        },
-        relations: ['guest']
-    })
-}
-
 
 const getReservationsInTimeframeByPropertyUuid = async (propertyUuid: UUID, starDate: Date, endDate: Date) => {
     return dataSource.getRepository(ReservationEntity).find({
@@ -84,7 +86,6 @@ export {
     getAllReservations,
     // createReservation,
     getReservationsByGuestUuid,
-    getReservationsByPropertyUuid,
     getReservationsInTimeframeByPropertyUuid,
     getReservationByUuid,
     softDeleteReservationByUuid,

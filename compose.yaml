@@ -11,13 +11,13 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
 
-  app:
-    env_file: ".env"
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ${APP_CONTAINER_NAME}
-    ports:
-      - '${APP_PORT}:${APP_PORT}'
-    depends_on:
-      - db
+  # app:
+  #   env_file: ".env"
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: ${APP_CONTAINER_NAME}
+  #   ports:
+  #     - '${APP_PORT}:${APP_PORT}'
+  #   depends_on:
+  #     - db

@@ -7,7 +7,12 @@ const getAllGuests = async () => {
     return dataSource.getRepository(GuestEntity).find({ 
         where: {
             deleted_at: IsNull()
-        } 
+        },
+        select: {
+            uuid: true,
+            name: true,
+            phone: true
+        }
     })
 }
 
@@ -20,6 +25,11 @@ const getGuestByName = async (name: string) => {
     return dataSource.getRepository(GuestEntity).find({
         where: {
             name: name
+        },
+        select: {
+            uuid: true,
+            name: true,
+            phone: true
         }
     })
 }
