@@ -1,7 +1,7 @@
-import { IsNull, LessThan, MoreThan } from "typeorm"
+import { IsNull, LessThan, MoreThan, Between } from "typeorm"
 import { UUID } from "crypto";
 import dataSource from "../../dataSource"
-import { ReservationEntity, ReservationInterface } from ".."
+import { ReservationEntity, ReservationInterface, SaveReservationDto } from ".."
 
 const getAllReservations = async () => {
     return dataSource.getRepository(ReservationEntity).find({ 
@@ -25,12 +25,6 @@ const getAllReservations = async () => {
         relations: ['guest', 'property']
     })
 }
-
-// const createReservation = async(newReservation: CreateReservationDto) => {
-
-//     const createdReservation = dataSource.getRepository(ReservationEntity).create(newReservation)
-//     return dataSource.getRepository(ReservationEntity).save(createdReservation)
-// }
 
 const getReservationsByGuestUuid = async (guestUuid: UUID) => {
     return dataSource.getRepository(ReservationEntity).find({
@@ -56,14 +50,28 @@ const countReservationsByGuestUuid = async (guestUuid: UUID) => {
 
 const getReservationsInTimeframeByPropertyUuid = async (propertyUuid: UUID, starDate: Date, endDate: Date) => {
     return dataSource.getRepository(ReservationEntity).find({
-        where: {
-            property: {
-                uuid: propertyUuid
+        where: [
+            {
+                property: {
+                    uuid: propertyUuid
+                },
+                deleted_at: IsNull(),
+                startDate: Between(
+                    starDate,
+                    endDate
+                )
             },
-            deleted_at: IsNull(),
-            startDate: MoreThan(starDate),
-            endDate: LessThan(endDate)
-        }
+            {
+                property: {
+                    uuid: propertyUuid
+                },
+                deleted_at: IsNull(),
+                endDate: Between(
+                    starDate,
+                    endDate
+                )
+            }
+        ]
     })
 }
 
@@ -82,12 +90,17 @@ const softDeleteReservationByUuid = async (reservationUuid: UUID) => {
 }
 
 
+const create = async(reservation: SaveReservationDto) => {
+    const createdReservation = dataSource.getRepository(ReservationEntity).create(reservation)
+    return dataSource.getRepository(ReservationEntity).save(createdReservation)
+}
+
 export {
     getAllReservations,
-    // createReservation,
     getReservationsByGuestUuid,
     getReservationsInTimeframeByPropertyUuid,
     getReservationByUuid,
     softDeleteReservationByUuid,
-    countReservationsByGuestUuid
+    countReservationsByGuestUuid,
+    create
 }

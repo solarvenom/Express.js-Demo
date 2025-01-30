@@ -58,9 +58,18 @@ const getReservationsByGuestUuid = async (guestUuid: UUID) => {
     })
 }
 
+const getByUuid = async (uuid: UUID) => {
+    return dataSource.getRepository(GuestEntity).find({
+        where: {
+            uuid: uuid
+        }
+    })
+}
+
 export {
     getAllGuests,
     createGuest,
     getGuestByName,
-    getReservationsByGuestUuid
+    getReservationsByGuestUuid,
+    getByUuid
 }

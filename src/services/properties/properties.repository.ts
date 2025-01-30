@@ -56,9 +56,19 @@ const getReservationsByPropertyUuid = async (propertyUuid: UUID) => {
     })
 }
 
+const getByUuid = async (uuid: UUID) => {
+    return dataSource.getRepository(PropertyEntity).find({
+        where: {
+            uuid: uuid
+        }
+    })
+}
+
+
 export {
     getAllProperties,
     createProperty,
     getPropertyByName,
-    getReservationsByPropertyUuid
+    getReservationsByPropertyUuid,
+    getByUuid
 }

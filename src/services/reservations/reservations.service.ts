@@ -1,25 +1,52 @@
-import { ReservationsRepository, ReservationInterface, CreateReservationDto } from ".."
+import { ReservationsRepository, ReservationInterface, CreateReservationDto, GuestsRepository, PropertiesRepository } from ".."
 
-const repository = ReservationsRepository
+const reservationRepository = ReservationsRepository
+const guestRepository = GuestsRepository
+const propertyRepository = PropertiesRepository
 
 const getAllReservations = async () => {
-    return repository.getAllReservations()
+    return reservationRepository.getAllReservations()
 }
 
-// const createReservation = async (newReservation: CreateReservationDto) => {
-//     if(!newReservation.guestUuid || newReservation.guestUuid.length == 0) throw new Error("Guest uuid missing")
-//     if(!newReservation.propertyUuid || newReservation.propertyUuid.length == 0) throw new Error("Property uuid missing")
+const createReservation = async (newReservation: CreateReservationDto) => {
+    if(!newReservation.guestUuid || newReservation.guestUuid.length == 0) throw new Error("Guest uuid missing")
+    if(!newReservation.propertyUuid || newReservation.propertyUuid.length == 0) throw new Error("Property uuid missing")
+    const now = new Date().getTime()
 
-//     const activeBookingsByGuest = await repository.countReservationsByGuestUuid(newReservation.guestUuid)
-//     if(activeBookingsByGuest == 5) throw new Error("Guest has 5 active bookings")
+    const startDate = new Date(newReservation.startDate)
+    if(!newReservation.startDate || startDate.getTime() < now) throw new Error("Start date either missing or in the past")
+    
+    const endDate = new Date(newReservation.endDate)
+    if(!newReservation.endDate || endDate.getTime() < now) throw new Error("End date either missing or in the past")
 
-//     // const propertyWithNameExists = await repository.getPropertyByName(newProperty.name)
-//     // if(propertyWithNameExists[0]) throw new Error("Property with specified name already exists")
+    const activeBookingsByGuest = await reservationRepository.countReservationsByGuestUuid(newReservation.guestUuid)
+    if(activeBookingsByGuest >= 5) throw new Error("Guest already has 5 active bookings")
 
-//     // return repository.createProperty(newProperty);
-// }
+    const timeframePropertyBookings = await reservationRepository.getReservationsInTimeframeByPropertyUuid(
+        newReservation.propertyUuid, 
+        startDate,
+        endDate
+    )
+
+    if(timeframePropertyBookings.length) throw new Error("Property booked in this time frame")
+    
+    const [
+        guest,
+        property
+    ] = await Promise.all([
+        guestRepository.getByUuid(newReservation.guestUuid),
+        propertyRepository.getByUuid(newReservation.propertyUuid)
+    ])
+
+    return reservationRepository.create({
+        guest: guest[0],
+        property: property[0],
+        startDate: startDate,
+        endDate: endDate
+    })
+}
 
 export {
     getAllReservations,
-    // createProperty
+    createReservation
 }

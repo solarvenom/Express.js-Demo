@@ -20,6 +20,7 @@ import * as PropertiesService from "./properties/properties.service"
 import * as ReservationsService from "./reservations/reservations.service"
 
 import { CreateReservationDto } from "./reservations/dtos/create.reservation.dto"
+import { SaveReservationDto } from "./reservations/dtos/save.reservation.dto"
 
 // Routers
 export { guestsController, propertiesController, reservationsController, coreController };
@@ -37,5 +38,5 @@ export { GuestsRepository, PropertiesRepository, ReservationsRepository }
 export { GuestsService, PropertiesService, ReservationsService }
 
 // DTOs
-export { CreateReservationDto }
+export { CreateReservationDto, SaveReservationDto }
 
