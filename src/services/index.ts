@@ -7,7 +7,11 @@ import { GuestEntity } from "./guests/entities/guest.entity";
 import { PropertyEntity } from "./properties/entities/property.entity";
 import { ReservationEntity } from "./reservations/entities/reservation.entity";
 
+import { GuestInterface } from "./guests/interfaces/guest.interface";
+
 import { GuestsRepository } from "./guests/guests.repository";
+
+import { GuestsService } from "./guests/guests.service"
 
 // Routers
 export { guestsController, propertiesController, reservationsController, coreController };
@@ -15,6 +19,12 @@ export { guestsController, propertiesController, reservationsController, coreCon
 // Entities
 export { GuestEntity, PropertyEntity, ReservationEntity };
 
-// Repositories
+// Interfaces
+export { GuestInterface }
 
+// Repositories
 export { GuestsRepository }
+
+// Services
+export { GuestsService }
+

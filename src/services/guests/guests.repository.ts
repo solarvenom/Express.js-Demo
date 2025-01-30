@@ -10,7 +10,7 @@ export class GuestsRepository {
         this.repository = dataSource.getRepository(GuestEntity);
     }
 
-    getAllGeusts = async () => {
+    getAllGuests = async () => {
         return this.repository.find({ 
             where: {
                 deleted_at: IsNull()
