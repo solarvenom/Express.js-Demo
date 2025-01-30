@@ -78,5 +78,36 @@ guestsController.post('/', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @swagger
+ * /guests/{guestUuid}:
+ *   get:
+ *     tags:
+ *       - GUESTS
+ *     summary: Get a list of guest resrevations by guestUuid.
+ *     description: Get a list of guest resrevations by guestUuid.
+ *     parameters:
+ *      - in: path
+ *        name: guestUuid
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: Guest UUID
+ *     responses:
+ *       '200':
+ *         description: A successful response
+ *       '500':
+ *         description: Internal server error
+ */
+guestsController.get('/:guestUuid', async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    const guestReservations = await GuestsService.getGuestReservationsByGuestUuid(req.params.guestUuid)
+    res.send(guestReservations);
+  } catch (error) {
+    res.send(`${error}`)
+  }
+});
+
 export default guestsController;
 

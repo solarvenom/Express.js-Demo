@@ -21,7 +21,6 @@ const createProperty = async(newProperty: PropertyInterface) => {
     return dataSource.getRepository(PropertyEntity).save(createdProperty)
 }
 
-
 const getPropertyByName = async (name: string) => {
     return dataSource.getRepository(PropertyEntity).find({
         where: {
@@ -33,7 +32,6 @@ const getPropertyByName = async (name: string) => {
         }
     })
 }
-
 
 const getReservationsByPropertyUuid = async (propertyUuid: UUID) => {
     return dataSource.getRepository(PropertyEntity).find({
@@ -57,7 +55,6 @@ const getReservationsByPropertyUuid = async (propertyUuid: UUID) => {
         relations: ['reservations', 'reservations.guest']
     })
 }
-
 
 export {
     getAllProperties,

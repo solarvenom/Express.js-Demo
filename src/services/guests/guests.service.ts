@@ -1,3 +1,4 @@
+import { UUID } from "crypto"
 import { GuestsRepository, GuestInterface } from "../"
 
 const repository = GuestsRepository
@@ -16,7 +17,33 @@ const createGuest = async (newGuest: GuestInterface) => {
     return repository.createGuest(newGuest);
 }
 
+const getGuestReservationsByGuestUuid = async (guestUuid: UUID) => {
+    const guestBookings = await repository.getReservationsByGuestUuid(guestUuid)
+
+    const now = new Date().getTime()
+
+    let status = 'Never Booked'
+    if(guestBookings[0].reservations.length){
+        if(guestBookings[0].reservations.some(
+            (reservation) => reservation.startDate.getTime() < now && now < reservation.endDate.getTime())
+        ){
+            status = 'Checked In'
+        } else {
+            if(guestBookings[0].reservations.some(
+                (reservation) => now < reservation.startDate.getTime())
+            ){
+                status = 'Booked'
+            } else {
+                status = 'Checked Out'
+            }
+        }
+    }
+
+    return { ...guestBookings[0], status: status }
+}
+
 export {
     getAllGuests,
-    createGuest
+    createGuest,
+    getGuestReservationsByGuestUuid
 }

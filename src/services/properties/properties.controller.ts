@@ -26,7 +26,6 @@ propertiesController.get('/', async (req: Request, res: Response) => {
     }
 });
 
-
 /**
  * @swagger
  * /properties/{propertyUuid}:

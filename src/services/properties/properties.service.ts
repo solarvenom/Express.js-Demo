@@ -1,24 +1,23 @@
 import { UUID } from "crypto"
-import { PropertiesRepository, ReservationsRepository, PropertyInterface } from "../"
+import { PropertiesRepository, PropertyInterface } from "../"
 
-const propertyRepository = PropertiesRepository
-const reservationRepository = ReservationsRepository
+const repository = PropertiesRepository
 
 const getAllProperties = async () => {
-    return propertyRepository.getAllProperties()
+    return repository.getAllProperties()
 }
 
 const getPropertyReservationsByUuid = async (propertyUuid: UUID) => {
-    return propertyRepository.getReservationsByPropertyUuid(propertyUuid)
+    return repository.getReservationsByPropertyUuid(propertyUuid)
 }
 
 const createProperty = async (newProperty: PropertyInterface) => {
     if(!newProperty.name || newProperty.name == "") throw new Error("Property name missing")
 
-    const propertyWithNameExists = await propertyRepository.getPropertyByName(newProperty.name)
+    const propertyWithNameExists = await repository.getPropertyByName(newProperty.name)
     if(propertyWithNameExists[0]) throw new Error("Property with specified name already exists")
 
-    return propertyRepository.createProperty(newProperty);
+    return repository.createProperty(newProperty);
 }
 
 export {
