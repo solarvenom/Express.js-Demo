@@ -9,12 +9,17 @@ import { ReservationEntity } from "./reservations/entities/reservation.entity";
 
 import { GuestInterface } from "./guests/interfaces/guest.interface";
 import { PropertyInterface } from "./properties/interfaces/property.interface";
+import { ReservationInterface } from "./reservations/interfaces/reservation.interface"
 
 import * as GuestsRepository from "./guests/guests.repository";
 import * as PropertiesRepository from "./properties/properties.repository";
+import * as ReservationsRepository from "./reservations/reservations.repository";
 
 import * as GuestsService from "./guests/guests.service"
 import * as PropertiesService from "./properties/properties.service"
+import * as ReservationsService from "./reservations/reservations.service"
+
+import { CreateReservationDto } from "./reservations/dtos/create.reservation.dto"
 
 // Routers
 export { guestsController, propertiesController, reservationsController, coreController };
@@ -23,11 +28,14 @@ export { guestsController, propertiesController, reservationsController, coreCon
 export { GuestEntity, PropertyEntity, ReservationEntity };
 
 // Interfaces
-export { GuestInterface, PropertyInterface }
+export { GuestInterface, PropertyInterface, ReservationInterface }
 
 // Repositories
-export { GuestsRepository, PropertiesRepository }
+export { GuestsRepository, PropertiesRepository, ReservationsRepository }
 
 // Services
-export { GuestsService, PropertiesService }
+export { GuestsService, PropertiesService, ReservationsService }
+
+// DTOs
+export { CreateReservationDto }
 
