@@ -8,10 +8,13 @@ import { PropertyEntity } from "./properties/entities/property.entity";
 import { ReservationEntity } from "./reservations/entities/reservation.entity";
 
 import { GuestInterface } from "./guests/interfaces/guest.interface";
+import { PropertyInterface } from "./properties/interfaces/property.interface";
 
 import * as GuestsRepository from "./guests/guests.repository";
+import * as PropertiesRepository from "./properties/properties.repository";
 
 import * as GuestsService from "./guests/guests.service"
+import * as PropertiesService from "./properties/properties.service"
 
 // Routers
 export { guestsController, propertiesController, reservationsController, coreController };
@@ -20,11 +23,11 @@ export { guestsController, propertiesController, reservationsController, coreCon
 export { GuestEntity, PropertyEntity, ReservationEntity };
 
 // Interfaces
-export { GuestInterface }
+export { GuestInterface, PropertyInterface }
 
 // Repositories
-export { GuestsRepository }
+export { GuestsRepository, PropertiesRepository }
 
 // Services
-export { GuestsService }
+export { GuestsService, PropertiesService }
 
