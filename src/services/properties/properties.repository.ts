@@ -7,7 +7,7 @@ const getAllProperties = async () => {
     return dataSource.getRepository(PropertyEntity).find({ 
         where: {
             deleted_at: IsNull()
-        } 
+        }
     })
 }
 

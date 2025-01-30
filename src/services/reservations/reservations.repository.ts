@@ -46,7 +46,8 @@ const getReservationsByPropertyUuid = async (propertyUuid: UUID) => {
                 uuid: propertyUuid
             },
             deleted_at: IsNull()
-        }
+        },
+        relations: ['guest']
     })
 }
 
