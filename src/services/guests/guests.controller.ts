@@ -70,13 +70,11 @@ guestsController.get('/', async (req: Request, res: Response) => {
  *         description: Internal server error
  */
 guestsController.post('/', async (req: Request, res: Response) => {
-  console.log("<<<<<<< POST>???????????")
   try {
-    console.log(JSON.stringify(req.body))
     const createdGuest = await GuestsService.createGuest(req.body)
     res.send(createdGuest);
   } catch (error) {
-    res.send(error)
+    res.send(`${error}`)
   }
 });
 

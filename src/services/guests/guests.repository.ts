@@ -16,7 +16,16 @@ const createGuest = async(newGuest: GuestInterface) => {
     return dataSource.getRepository(GuestEntity).save(createdGuest)
 }
 
+const getGuestByName = async (name: string) => {
+    return dataSource.getRepository(GuestEntity).find({
+        where: {
+            name: name
+        }
+    })
+}
+
 export {
     getAllGuests,
-    createGuest
+    createGuest,
+    getGuestByName
 }
